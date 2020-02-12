@@ -12,10 +12,9 @@ public interface Messages {
   String REQUIRED_HEADER = "400.007";
 
   // 404
-  String TRANSACTION_NOT_FOUND = "404.001";
+  String USER_NOT_FOUND = "404.001";
 
   // 422
   String CONTACT_SYSTEM_ADMIN = "422.001";
-  String EMAILAGE_REQUEST_HAS_FAILED = "422.002";
-  String EMAILAGE_SCORE_NOT_FOUND = "422.003";
+
 }
