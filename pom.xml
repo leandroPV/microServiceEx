@@ -9,7 +9,7 @@
   <properties>
     <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <scm.connection.url>git@github.com:cartaoelo/api-exemple.git</scm.connection.url>
+    <scm.connection.url>git@github.com:leandroPV/api-exemple.git</scm.connection.url>
     <guava.version>27.0.1-jre</guava.version>
     <jmockit.version>1.45</jmockit.version>
     <maven-failsafe-plugin.version>2.22.1</maven-failsafe-plugin.version>
