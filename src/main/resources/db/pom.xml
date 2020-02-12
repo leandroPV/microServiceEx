@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>dbdeploy-maven</artifactId>
+  <groupId>com.sensedia</groupId>
+  <version>1.0-SNAPSHOT</version>
+  <name>DB Deploy</name>
+    <description>Apply changes to postgresql</description>
+  
+  <dependencies>
+        <dependency>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.1-901.jdbc4</version>
+    </dependency>
+      </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sql-maven-plugin</artifactId>
+        <version>1.1</version>
+                <dependencies>
+          <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901.jdbc4</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <driver>org.postgresql.Driver</driver>
+          <url>jdbc:postgresql://localhost:5432/api-exemple</url>
+          <username>postgres</username>
+          <password>postgres</password>
+        </configuration>
+                <executions>
+          <execution>
+            <id>create-change-log</id>
+            <phase>process-test-sources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <configuration>
+              <srcFiles>
+                <srcFile>${basedir}/createSchemaVersionTable.sql</srcFile>
+              </srcFiles>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.dbdeploy</groupId>
+        <artifactId>maven-dbdeploy-plugin</artifactId>
+        <version>3.0M3</version>
+
+                <configuration>
+          <scriptdirectory>.</scriptdirectory>
+          <driver>org.postgresql.Driver</driver>
+          <url>jdbc:postgresql://localhost:5432/api-exemple</url>
+          <userid>postgres</userid>
+          <password>postgres</password>
+          <dbms>public</dbms>
+          <delimiter>;</delimiter>
+          <delimiterType>row</delimiterType>
+          <outputfile>apply.sql</outputfile>
+          <undoOutputfile>undo.sql</undoOutputfile>
+        </configuration>
+
+        <dependencies>
+          <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901.jdbc4</version>
+          </dependency>
+          <dependency>
+            <groupId>com.dbdeploy</groupId>
+            <artifactId>dbdeploy-core</artifactId>
+            <version>3.0M3</version>
+          </dependency>
+        </dependencies>
+              </plugin>
+    </plugins>
+  </build>
+</project>
