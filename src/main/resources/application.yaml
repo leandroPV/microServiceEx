@@ -27,7 +27,7 @@ spring:
   datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/api-exemple}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/api_exemple}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
     type: com.zaxxer.hikari.HikariDataSource
@@ -36,12 +36,3 @@ spring:
       minimum-idle: ${HIKARI_MINIMUM_IDLE:2}
   main:
     allow-bean-definition-overriding: true
-
-cacheInDays:
-  emailAge: 7
-rest:
-  gw:
-    clientId: ${REST_GW_CLIENT_ID:c173c9f7-47e4-3d1c-b49e-1a8e89c9cc2f} # configuração acesso gateway
-    url:
-      emailAge: ${REST_GW_URI_POST_EMAILAGE_VALIDATOR:https://dev-api.elo.com.br/external/emailage/v1/emailagevalidator?oauth_timestamp=1.5506889089E12&email={{email}}{{ipAddress}}&format=json} # configuração acesso serviço externo
-

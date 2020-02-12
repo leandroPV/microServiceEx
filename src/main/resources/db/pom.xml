@@ -7,15 +7,19 @@
   <groupId>com.sensedia</groupId>
   <version>1.0-SNAPSHOT</version>
   <name>DB Deploy</name>
-    <description>Apply changes to postgresql</description>
-  
+  <description>Apply changes to postgresql</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencies>
-        <dependency>
+    <dependency>
       <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>9.1-901.jdbc4</version>
     </dependency>
-      </dependencies>
+  </dependencies>
 
   <build>
     <plugins>
@@ -23,7 +27,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>sql-maven-plugin</artifactId>
         <version>1.1</version>
-                <dependencies>
+        <dependencies>
           <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -32,11 +36,11 @@
         </dependencies>
         <configuration>
           <driver>org.postgresql.Driver</driver>
-          <url>jdbc:postgresql://localhost:5432/api-exemple</url>
+          <url>jdbc:postgresql://localhost:5432/api_exemple</url>
           <username>postgres</username>
           <password>postgres</password>
         </configuration>
-                <executions>
+        <executions>
           <execution>
             <id>create-change-log</id>
             <phase>process-test-sources</phase>
@@ -56,10 +60,10 @@
         <artifactId>maven-dbdeploy-plugin</artifactId>
         <version>3.0M3</version>
 
-                <configuration>
+        <configuration>
           <scriptdirectory>.</scriptdirectory>
           <driver>org.postgresql.Driver</driver>
-          <url>jdbc:postgresql://localhost:5432/api-exemple</url>
+          <url>jdbc:postgresql://localhost:5432/api_exemple</url>
           <userid>postgres</userid>
           <password>postgres</password>
           <dbms>public</dbms>
@@ -81,7 +85,7 @@
             <version>3.0M3</version>
           </dependency>
         </dependencies>
-              </plugin>
+      </plugin>
     </plugins>
   </build>
 </project>

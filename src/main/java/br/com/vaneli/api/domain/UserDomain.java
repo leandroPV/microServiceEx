@@ -2,6 +2,7 @@ package br.com.vaneli.api.domain;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+import br.com.vaneli.api.interfaces.json.User;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,6 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -41,5 +44,13 @@ public class UserDomain extends AuditDomain {
   @ToString.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
   private List<ContactDomain> contacts = newArrayList();
+
+  public User toUser() {
+    return User.builder()
+      .id(this.id)
+      .name(this.name)
+      .cpf(this.cpf)
+      .build();
+  }
 
 }

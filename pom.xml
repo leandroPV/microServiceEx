@@ -23,15 +23,6 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <!-- repositório maven no Nexus -->
-  <repositories>
-    <repository>
-      <id>maven-nexus-release-repo</id>
-      <name>Nexus Release Repository</name>
-      <url>http://52.67.117.202:8081/repository/maven-nexus-release-repo</url>
-    </repository>
-  </repositories>
-
   <dependencies>
 
     <!--Spring dependencies -->
@@ -130,6 +121,20 @@
       <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
+
+    <!--  QueryDSL  -->
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-apt</artifactId>
+      <version>${querydsl.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-jpa</artifactId>
+      <version>${querydsl.version}</version>
+    </dependency>
+
   </dependencies>
 
   <scm>
@@ -149,6 +154,23 @@
       </resource>
     </resources>
     <plugins>
+
+      <plugin>
+        <groupId>com.mysema.maven</groupId>
+        <artifactId>apt-maven-plugin</artifactId>
+        <version>1.1.3</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>target/generated-sources/java</outputDirectory>
+              <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
       <plugin>
         <groupId>org.springframework.boot</groupId>

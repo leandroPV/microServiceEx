@@ -9,6 +9,10 @@
   <name>DB Deploy</name>
   <description>Apply changes to postgresql</description>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>postgresql</groupId>
@@ -64,6 +68,7 @@
           <password>${spring.datasource.password}</password>
           <dbms>public</dbms>
           <delimiter>;</delimiter>
+          <delimiterType>row</delimiterType>
           <outputfile>apply.sql</outputfile>
           <undoOutputfile>undo.sql</undoOutputfile>
         </configuration>

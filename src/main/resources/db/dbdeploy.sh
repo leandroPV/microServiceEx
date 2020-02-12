@@ -17,10 +17,10 @@ setPomDbDeploy(){
 /bin/cp pom-unparsed.xml pom.xml
 pom=pom.xml
 
-sed  -i -e  's/${dollar}{spring.database.driverClassName}/'"$driver"'/g' $pom
-sed  -i -e  's/${dollar}{spring.datasource.url}/'"$url"'/g' $pom
-sed  -i -e  's/${dollar}{spring.datasource.username}/'"$username"'/g' $pom
-sed  -i -e  's/${dollar}{spring.datasource.password}/'"$password"'/g' $pom
+sed  -i -e  's/\${spring.database.driverClassName}/'"$driver"'/g' $pom
+sed  -i -e  's/\${spring.datasource.url}/'"$url"'/g' $pom
+sed  -i -e  's/\${spring.datasource.username}/'"$username"'/g' $pom
+sed  -i -e  's/\${spring.datasource.password}/'"$password"'/g' $pom
 }
 
 runDbDeploy(){
