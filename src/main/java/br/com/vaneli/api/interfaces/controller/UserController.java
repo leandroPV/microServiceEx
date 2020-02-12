@@ -3,6 +3,7 @@ package br.com.vaneli.api.interfaces.controller;
 import br.com.vaneli.api.domain.UserDomain;
 import br.com.vaneli.api.filters.UserFilter;
 import br.com.vaneli.api.interfaces.json.User;
+import br.com.vaneli.api.interfaces.json.UserPatch;
 import br.com.vaneli.api.interfaces.json.UserPost;
 import br.com.vaneli.api.interfaces.json.UserPut;
 import br.com.vaneli.api.services.UserService;
@@ -17,7 +18,9 @@ import javax.validation.constraints.PositiveOrZero;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -74,6 +77,20 @@ public class UserController implements BaseController<User> {
     @PathVariable UUID userId,
     @RequestBody @Valid UserPut userPut) {
     this.userService.putUser(userId, userPut);
+    return noContent();
+  }
+
+  @PatchMapping("/{userId}")
+  public ResponseEntity<Void> patchUser(
+    @PathVariable UUID userId,
+    @RequestBody @Valid UserPatch userPatch) {
+    this.userService.patchUser(userId, userPatch);
+    return noContent();
+  }
+
+  @DeleteMapping("/{userId}")
+  public ResponseEntity<Void> deleteUser(@PathVariable UUID userId) {
+    this.userService.deleteUser(userId);
     return noContent();
   }
 

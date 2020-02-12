@@ -7,6 +7,7 @@ import br.com.vaneli.api.exceptions.UnprocessableEntityException;
 import br.com.vaneli.api.filters.UserFilter;
 import br.com.vaneli.api.interfaces.Messages;
 import br.com.vaneli.api.interfaces.json.User;
+import br.com.vaneli.api.interfaces.json.UserPatch;
 import br.com.vaneli.api.interfaces.json.UserPost;
 import br.com.vaneli.api.interfaces.json.UserPut;
 import br.com.vaneli.api.repository.UserRepository;
@@ -64,6 +65,24 @@ public class UserServiceImpl implements UserService {
     this.userRepository.save(userDomain);
   }
 
+  @Override
+  @Transactional
+  public void patchUser(UUID userId, UserPatch userPatch) {
+    UserDomain userDomain = this.getUserDomainById(userId);
+
+    userPatch.toUserDomain(userDomain);
+    this.userRepository.save(userDomain);
+  }
+
+  @Override
+  @Transactional
+  public void deleteUser(UUID userId) {
+    UserDomain userDomain = this.getUserDomainById(userId);
+
+    this.userRepository.delete(userDomain);
+  }
+
+  @Override
   @Transactional(readOnly = true)
   public UserDomain getUserDomainById(UUID userId) {
     return this.userRepository.findById(userId)
@@ -72,6 +91,7 @@ public class UserServiceImpl implements UserService {
         "User not found -> userId={0}", userId)));
   }
 
+  @Override
   @Transactional(readOnly = true)
   public void existsUserDomainById(UUID userId) {
     if (!this.userRepository.existsById(userId)) {
