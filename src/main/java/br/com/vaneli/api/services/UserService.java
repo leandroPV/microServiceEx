@@ -25,5 +25,4 @@ public interface UserService {
 
   UserDomain getUserDomainById(UUID userId);
 
-  void existsUserDomainById(UUID userId);
 }

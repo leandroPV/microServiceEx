@@ -18,6 +18,4 @@ public interface UserRepository extends JpaRepository<UserDomain, UUID>,
   default void customize(QuerydslBindings bindings, QUserDomain root) {
   }
 
-  boolean existsById(UUID userId);
-
 }

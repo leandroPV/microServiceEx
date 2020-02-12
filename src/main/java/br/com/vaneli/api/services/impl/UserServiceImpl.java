@@ -3,7 +3,6 @@ package br.com.vaneli.api.services.impl;
 import br.com.vaneli.api.domain.UserDomain;
 import br.com.vaneli.api.exceptions.MessageError;
 import br.com.vaneli.api.exceptions.NotFoundException;
-import br.com.vaneli.api.exceptions.UnprocessableEntityException;
 import br.com.vaneli.api.filters.UserFilter;
 import br.com.vaneli.api.interfaces.Messages;
 import br.com.vaneli.api.interfaces.json.User;
@@ -89,16 +88,6 @@ public class UserServiceImpl implements UserService {
       .orElseThrow(() -> new NotFoundException(this.messageError.create(
         Messages.USER_NOT_FOUND), MessageFormat.format(
         "User not found -> userId={0}", userId)));
-  }
-
-  @Override
-  @Transactional(readOnly = true)
-  public void existsUserDomainById(UUID userId) {
-    if (!this.userRepository.existsById(userId)) {
-      throw new UnprocessableEntityException(this.messageError.create(
-        Messages.USER_NOT_FOUND), MessageFormat.format(
-        "User not found -> userId={0}", userId));
-    }
   }
 
 }
