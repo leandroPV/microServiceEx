@@ -4,6 +4,7 @@ import br.com.vaneli.api.domain.UserDomain;
 import br.com.vaneli.api.filters.UserFilter;
 import br.com.vaneli.api.interfaces.json.User;
 import br.com.vaneli.api.interfaces.json.UserPost;
+import br.com.vaneli.api.interfaces.json.UserPut;
 import br.com.vaneli.api.services.UserService;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,6 +67,14 @@ public class UserController implements BaseController<User> {
   @GetMapping("/{userId}")
   public ResponseEntity<User> getUser(@PathVariable UUID userId) {
     return ok(this.userService.getUser(userId));
+  }
+
+  @PutMapping("/{userId}")
+  public ResponseEntity<Void> putUser(
+    @PathVariable UUID userId,
+    @RequestBody @Valid UserPut userPut) {
+    this.userService.putUser(userId, userPut);
+    return noContent();
   }
 
 }
