@@ -420,6 +420,57 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"value\": \"leandropvaneli@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}/contacts/{{contactId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}",
+								"contacts",
+								"{{contactId}}"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

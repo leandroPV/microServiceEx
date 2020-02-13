@@ -4,6 +4,7 @@ import br.com.vaneli.api.domain.ContactDomain;
 import br.com.vaneli.api.filters.ContactFilter;
 import br.com.vaneli.api.interfaces.json.Contact;
 import br.com.vaneli.api.interfaces.json.ContactPost;
+import br.com.vaneli.api.interfaces.json.ContactPut;
 import java.util.UUID;
 import org.springframework.data.domain.Page;
 
@@ -22,4 +23,5 @@ public interface ContactService {
   ContactDomain getContactDomain(UUID userId, UUID contactId);
 
 
+  void putContact(UUID userId, UUID contactId, ContactPut contactPut);
 }

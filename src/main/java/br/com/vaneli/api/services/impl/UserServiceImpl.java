@@ -90,4 +90,14 @@ public class UserServiceImpl implements UserService {
         "User not found -> userId={0}", userId)));
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public void existsUserDomainById(UUID userId) {
+    if (!this.userRepository.existsById(userId)) {
+      throw new NotFoundException(this.messageError.create(
+        Messages.USER_NOT_FOUND), MessageFormat.format(
+        "User not found -> userId={0}", userId));
+    }
+  }
+
 }
