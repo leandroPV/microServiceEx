@@ -13,6 +13,7 @@ public interface Messages {
 
   // 404
   String USER_NOT_FOUND = "404.001";
+  String CONTACT_NOT_FOUND = "404.002";
 
   // 422
   String CONTACT_SYSTEM_ADMIN = "422.001";
