@@ -38,6 +38,7 @@ public class UserDomain extends AuditDomain {
   @Column(name = "tx_name", nullable = false)
   private String name;
 
+  //TODO criptografar o cpf usando o @Convert
   @Column(name = "tx_cpf", nullable = false)
   private String cpf;
 
