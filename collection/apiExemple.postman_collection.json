@@ -1,281 +1,428 @@
 {
 	"info": {
-		"_postman_id": "31a5d338-9a12-419a-8dee-2e18e0cff37e",
+		"_postman_id": "88fbe4c3-048e-43a6-aff5-91aca43e2973",
 		"name": "apiExemple",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "user",
-			"event": [
+			"name": "Users",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
-						"exec": [
-							"let userId = postman.getResponseHeader(\"id\");",
-							"pm.environment.set(\"userId\", userId);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\": \"leandro vaneli 2\",\n\t\"cpf\": \"1234567890\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"name": "user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									"let userId = postman.getResponseHeader(\"id\");",
+									"pm.environment.set(\"userId\", userId);"
+								],
+								"type": "text/javascript"
+							}
 						}
-					}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"leandro vaneli 2\",\n\t\"cpf\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8090/api-exemple/v1/users",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"api-exemple",
-						"v1",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "users",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "localhost:8090/api-exemple/v1/users?_offset=0&_limit=50",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"api-exemple",
-						"v1",
-						"users"
-					],
-					"query": [
-						{
-							"key": "startCreated",
-							"value": "2020-02-12T08:00:00.000Z",
-							"disabled": true
-						},
-						{
-							"key": "endCreated",
-							"value": "2020-02-12T23:59:59.000Z",
-							"disabled": true
-						},
-						{
-							"key": "name",
-							"value": "leandro vaneli 1",
-							"disabled": true
-						},
-						{
-							"key": "cpf",
-							"value": "1234567890",
-							"disabled": true
-						},
-						{
-							"key": "_offset",
-							"value": "0"
-						},
-						{
-							"key": "_limit",
-							"value": "50"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user by id",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "localhost:8090/api-exemple/v1/users/{{userId}}",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"api-exemple",
-						"v1",
-						"users",
-						"{{userId}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user",
-			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
-						"exec": [
-							""
+					"name": "users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
 						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\": \"leandro vaneli 3\",\n\t\"cpf\": \"1234567891\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users?_offset=0&_limit=50",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "startCreated",
+									"value": "2020-02-12T08:00:00.000Z",
+									"disabled": true
+								},
+								{
+									"key": "endCreated",
+									"value": "2020-02-12T23:59:59.000Z",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "leandro vaneli 1",
+									"disabled": true
+								},
+								{
+									"key": "cpf",
+									"value": "1234567890",
+									"disabled": true
+								},
+								{
+									"key": "_offset",
+									"value": "0"
+								},
+								{
+									"key": "_limit",
+									"value": "50"
+								}
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8090/api-exemple/v1/users/{{userId}}",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"api-exemple",
-						"v1",
-						"users",
-						"{{userId}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user",
-			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
-						"exec": [
-							""
+					"name": "user by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
 						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"cpf\": \"1234567892\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8090/api-exemple/v1/users/{{userId}}",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"api-exemple",
-						"v1",
-						"users",
-						"{{userId}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user",
-			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
-						"exec": [
-							""
+					"name": "user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
 						],
-						"type": "text/javascript"
-					}
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"leandro vaneli 3\",\n\t\"cpf\": \"1234567891\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cpf\": \"1234567892\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "localhost:8090/api-exemple/v1/users/{{userId}}",
-					"host": [
-						"localhost"
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									"let contactId = postman.getResponseHeader(\"id\");",
+									"pm.environment.set(\"contactId\", contactId);"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"port": "8090",
-					"path": [
-						"api-exemple",
-						"v1",
-						"users",
-						"{{userId}}"
-					]
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"value\": \"leandrop@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}/contacts",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contacts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}/contacts?_offset=0&_limit=50",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}",
+								"contacts"
+							],
+							"query": [
+								{
+									"key": "startCreated",
+									"value": "2020-02-12T08:00:00.000Z",
+									"disabled": true
+								},
+								{
+									"key": "endCreated",
+									"value": "2020-02-12T23:59:59.000Z",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "leandro vaneli 1",
+									"disabled": true
+								},
+								{
+									"key": "_offset",
+									"value": "0"
+								},
+								{
+									"key": "_limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contact by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}/contacts/{{contactId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}",
+								"contacts",
+								"{{contactId}}"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
