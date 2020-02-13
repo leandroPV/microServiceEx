@@ -3,6 +3,7 @@ package br.com.vaneli.api.services;
 import br.com.vaneli.api.domain.ContactDomain;
 import br.com.vaneli.api.filters.ContactFilter;
 import br.com.vaneli.api.interfaces.json.Contact;
+import br.com.vaneli.api.interfaces.json.ContactPatch;
 import br.com.vaneli.api.interfaces.json.ContactPost;
 import br.com.vaneli.api.interfaces.json.ContactPut;
 import java.util.UUID;
@@ -24,4 +25,8 @@ public interface ContactService {
 
 
   void putContact(UUID userId, UUID contactId, ContactPut contactPut);
+
+  void patchContact(UUID userId, UUID contactId, ContactPatch contactPatch);
+
+  void deleteContact(UUID userId, UUID contactId);
 }

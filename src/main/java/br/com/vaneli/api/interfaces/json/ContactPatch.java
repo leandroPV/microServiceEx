@@ -1,7 +1,7 @@
 package br.com.vaneli.api.interfaces.json;
 
 import br.com.vaneli.api.domain.ContactDomain;
-import javax.validation.constraints.NotBlank;
+import com.google.common.base.Strings;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,13 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ContactPatch {
 
-  @NotBlank
   private String value;
 
-  public ContactDomain toContactDomain() {
-    return ContactDomain.builder()
-      .value(this.value)
-      .build();
+  public void toContactDomain(ContactDomain contactDomain) {
+    if (!Strings.isNullOrEmpty(this.value)) contactDomain.setValue(this.value);
   }
 
 }

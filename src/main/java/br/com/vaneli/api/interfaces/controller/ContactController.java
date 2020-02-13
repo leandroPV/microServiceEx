@@ -3,6 +3,7 @@ package br.com.vaneli.api.interfaces.controller;
 import br.com.vaneli.api.domain.ContactDomain;
 import br.com.vaneli.api.filters.ContactFilter;
 import br.com.vaneli.api.interfaces.json.Contact;
+import br.com.vaneli.api.interfaces.json.ContactPatch;
 import br.com.vaneli.api.interfaces.json.ContactPost;
 import br.com.vaneli.api.interfaces.json.ContactPut;
 import br.com.vaneli.api.services.ContactService;
@@ -17,7 +18,9 @@ import javax.validation.constraints.PositiveOrZero;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -79,6 +82,25 @@ public class ContactController implements BaseController<Contact> {
     @RequestBody @Valid ContactPut contactPut
   ) {
     this.contactService.putContact(userId, contactId, contactPut);
+    return noContent();
+  }
+
+  @PatchMapping("/{contactId}")
+  public ResponseEntity<Void> patchContact(
+    @PathVariable UUID userId,
+    @PathVariable UUID contactId,
+    @RequestBody @Valid ContactPatch contactPatch
+  ) {
+    this.contactService.patchContact(userId, contactId, contactPatch);
+    return noContent();
+  }
+
+  @DeleteMapping("/{contactId}")
+  public ResponseEntity<Void> deleteUser(
+    @PathVariable UUID userId,
+    @PathVariable UUID contactId
+  ) {
+    this.contactService.deleteContact(userId, contactId);
     return noContent();
   }
 

@@ -7,6 +7,7 @@ import br.com.vaneli.api.exceptions.NotFoundException;
 import br.com.vaneli.api.filters.ContactFilter;
 import br.com.vaneli.api.interfaces.Messages;
 import br.com.vaneli.api.interfaces.json.Contact;
+import br.com.vaneli.api.interfaces.json.ContactPatch;
 import br.com.vaneli.api.interfaces.json.ContactPost;
 import br.com.vaneli.api.interfaces.json.ContactPut;
 import br.com.vaneli.api.repository.ContactRepository;
@@ -82,6 +83,25 @@ public class ContactServiceImpl implements ContactService {
     ContactDomain contactDomain = this.getContactDomain(userId, contactId);
     contactPut.toContactDomain(contactDomain);
     this.contactRepository.save(contactDomain);
+  }
+
+  @Override
+  @Transactional
+  public void patchContact(
+    UUID userId,
+    UUID contactId,
+    ContactPatch contactPatch) {
+    this.userService.existsUserDomainById(userId);
+    ContactDomain contactDomain = this.getContactDomain(userId, contactId);
+    contactPatch.toContactDomain(contactDomain);
+    this.contactRepository.save(contactDomain);
+  }
+
+  @Override
+  @Transactional
+  public void deleteContact(UUID userId, UUID contactId) {
+    ContactDomain contactDomain = this.getContactDomain(userId, contactId);
+    this.contactRepository.delete(contactDomain);
   }
 
 }

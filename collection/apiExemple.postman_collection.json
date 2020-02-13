@@ -471,6 +471,99 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"value\": \"leandropvaneli111@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}/contacts/{{contactId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}",
+								"contacts",
+								"{{contactId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8090/api-exemple/v1/users/{{userId}}/contacts/{{contactId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api-exemple",
+								"v1",
+								"users",
+								"{{userId}}",
+								"contacts",
+								"{{contactId}}"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
