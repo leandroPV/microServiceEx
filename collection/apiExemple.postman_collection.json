@@ -6,6 +6,60 @@
 	},
 	"item": [
 		{
+			"name": "CEP",
+			"item": [
+				{
+					"name": "cep",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
+								"exec": [
+									"let userId;",
+									"",
+									"if (postman.getResponseHeader(\"id\")) {",
+									"    userId = postman.getResponseHeader(\"id\");",
+									"    pm.environment.set(\"userId\", userId);    ",
+									"} ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.postmon.com.br/v1/cep/13097-252",
+							"protocol": "https",
+							"host": [
+								"api",
+								"postmon",
+								"com",
+								"br"
+							],
+							"path": [
+								"v1",
+								"cep",
+								"13097-252"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "Users",
 			"item": [
 				{
@@ -16,8 +70,13 @@
 							"script": {
 								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
 								"exec": [
-									"let userId = postman.getResponseHeader(\"id\");",
-									"pm.environment.set(\"userId\", userId);"
+									"let userId;",
+									"",
+									"if (postman.getResponseHeader(\"id\")) {",
+									"    userId = postman.getResponseHeader(\"id\");",
+									"    pm.environment.set(\"userId\", userId);    ",
+									"} ",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -35,7 +94,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"leandro vaneli 2\",\n\t\"cpf\": \"1234567890\"\n}",
+							"raw": "{\n\t\"name\": \"leandro vaneli 4\",\n\t\"cpf\": \"14291996799\",\n\t\"phone\": \"+5527999365103\",\n\t\"cep\": \"13087-460\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,7 +227,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"leandro vaneli 3\",\n\t\"cpf\": \"1234567891\"\n}",
+							"raw": "{\n\t\"name\": \"leandro vaneli 3\",\n\t\"cpf\": \"14291996799\",\n\t\"phone\": \"+5527999365103\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,7 +276,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"cpf\": \"1234567892\"\n}",
+							"raw": "{\n\t\"cpf\": \"88868252007\",\n\t\"cep\": \"13097-252\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -294,8 +353,12 @@
 							"script": {
 								"id": "8d8939a8-e84c-496e-8c29-fd0ca5c15948",
 								"exec": [
-									"let contactId = postman.getResponseHeader(\"id\");",
-									"pm.environment.set(\"contactId\", contactId);"
+									"let contactId; ",
+									"",
+									"if (postman.getResponseHeader(\"id\")) {",
+									"    contactId = postman.getResponseHeader(\"id\");",
+									"    pm.environment.set(\"contactId\", contactId);",
+									"}"
 								],
 								"type": "text/javascript"
 							}

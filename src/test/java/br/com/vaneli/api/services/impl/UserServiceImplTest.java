@@ -7,17 +7,20 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import br.com.vaneli.api.domain.AddressDomain;
 import br.com.vaneli.api.domain.UserDomain;
 import br.com.vaneli.api.exceptions.MessageError;
 import br.com.vaneli.api.exceptions.MessageError.ApiError;
 import br.com.vaneli.api.exceptions.NotFoundException;
 import br.com.vaneli.api.filters.UserFilter;
 import br.com.vaneli.api.interfaces.Messages;
+import br.com.vaneli.api.interfaces.json.Address;
 import br.com.vaneli.api.interfaces.json.User;
 import br.com.vaneli.api.interfaces.json.UserPatch;
 import br.com.vaneli.api.interfaces.json.UserPost;
 import br.com.vaneli.api.interfaces.json.UserPut;
 import br.com.vaneli.api.repository.UserRepository;
+import br.com.vaneli.api.services.CepService;
 import br.com.vaneli.api.services.UserService;
 import com.querydsl.core.types.Predicate;
 import java.util.List;
@@ -40,6 +43,7 @@ public class UserServiceImplTest {
   private static Integer LIMIT;
   private static Integer OFFSET;
   private static UUID USER_ID;
+  private  static String CEP;
 
   private UserService userService;
 
@@ -65,17 +69,24 @@ public class UserServiceImplTest {
   private UserPatch userPatch;
   @Mock
   private User user;
+  @Mock
+  private CepService cepService;
+  @Mock
+  private Address address;
+  @Mock
+  private AddressDomain addressDomain;
 
   @BeforeAll
   public static void beforeAll() {
     OFFSET = 0;
     LIMIT = 50;
     USER_ID = UUID.randomUUID();
+    CEP = "123456";
   }
 
   @BeforeEach
   public void beforeEach() {
-    userService = spy(new UserServiceImpl(messageError, userRepository));
+    userService = spy(new UserServiceImpl(messageError, userRepository, cepService));
   }
 
   @DisplayName("Should add user successfully")
@@ -83,6 +94,18 @@ public class UserServiceImplTest {
   public void postUserSuccessfully() {
     when(userPost.toUserDomain()).thenReturn(userDomain);
     when(userRepository.save(userDomain)).thenReturn(userDomain);
+
+    assertEquals(userDomain, userService.postUser(userPost));
+  }
+
+  @DisplayName("Should add user with cep successfully")
+  @Test
+  public void postUserWithCepSuccessfully() {
+    when(userPost.toUserDomain()).thenReturn(userDomain);
+    when(userRepository.save(userDomain)).thenReturn(userDomain);
+    when(userDomain.getCep()).thenReturn(CEP);
+    when(cepService.getCep(CEP)).thenReturn(address);
+    when(address.toAddressDomain()).thenReturn(addressDomain);
 
     assertEquals(userDomain, userService.postUser(userPost));
   }

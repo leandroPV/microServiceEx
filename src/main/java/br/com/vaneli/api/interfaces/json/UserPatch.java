@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Data
 @Builder
@@ -19,15 +20,19 @@ public class UserPatch {
   private String name;
 
   @Size(max = 20)
+  @CPF
   private String cpf;
 
   @InternationalPhone
   private String phone;
 
+  private String cep;
+
   public void toUserDomain(UserDomain userDomain) {
     if (!Strings.isNullOrEmpty(this.name)) userDomain.setName(this.name);
     if (!Strings.isNullOrEmpty(this.cpf)) userDomain.setCpf(this.cpf);
     if (!Strings.isNullOrEmpty(this.phone)) userDomain.setCpf(this.phone);
+    if (!Strings.isNullOrEmpty(this.cep)) userDomain.setCep(this.cep);
   }
 
 }

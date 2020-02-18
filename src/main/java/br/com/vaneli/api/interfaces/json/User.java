@@ -20,4 +20,8 @@ public class User {
 
   private String phone;
 
+  private String cep;
+
+  private Address address;
+
 }

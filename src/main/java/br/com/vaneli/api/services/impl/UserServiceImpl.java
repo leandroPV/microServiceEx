@@ -1,17 +1,22 @@
 package br.com.vaneli.api.services.impl;
 
+import br.com.vaneli.api.domain.AddressDomain;
 import br.com.vaneli.api.domain.UserDomain;
 import br.com.vaneli.api.exceptions.MessageError;
 import br.com.vaneli.api.exceptions.NotFoundException;
 import br.com.vaneli.api.filters.UserFilter;
 import br.com.vaneli.api.interfaces.Messages;
+import br.com.vaneli.api.interfaces.json.Address;
 import br.com.vaneli.api.interfaces.json.User;
 import br.com.vaneli.api.interfaces.json.UserPatch;
 import br.com.vaneli.api.interfaces.json.UserPost;
 import br.com.vaneli.api.interfaces.json.UserPut;
 import br.com.vaneli.api.repository.UserRepository;
+import br.com.vaneli.api.services.CepService;
 import br.com.vaneli.api.services.UserService;
+import com.google.common.base.Strings;
 import java.text.MessageFormat;
+import java.util.Objects;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,17 +30,21 @@ public class UserServiceImpl implements UserService {
 
   private final MessageError messageError;
   private final UserRepository userRepository;
+  private final CepService cepService;
 
-  public UserServiceImpl(MessageError messageError,
-    UserRepository userRepository) {
+  public UserServiceImpl(
+    MessageError messageError,
+    UserRepository userRepository, CepService cepService) {
     this.messageError = messageError;
     this.userRepository = userRepository;
+    this.cepService = cepService;
   }
 
   @Override
   @Transactional
   public UserDomain postUser(UserPost userPost) {
     UserDomain userDomain = userPost.toUserDomain();
+    addAddress(userDomain);
 
     return this.userRepository.save(userDomain);
   }
@@ -61,6 +70,7 @@ public class UserServiceImpl implements UserService {
     UserDomain userDomain = this.getUserDomainById(userId);
 
     userPut.toUserDomain(userDomain);
+    addAddress(userDomain);
     this.userRepository.save(userDomain);
   }
 
@@ -70,6 +80,7 @@ public class UserServiceImpl implements UserService {
     UserDomain userDomain = this.getUserDomainById(userId);
 
     userPatch.toUserDomain(userDomain);
+    addAddress(userDomain);
     this.userRepository.save(userDomain);
   }
 
@@ -97,6 +108,20 @@ public class UserServiceImpl implements UserService {
       throw new NotFoundException(this.messageError.create(
         Messages.USER_NOT_FOUND), MessageFormat.format(
         "User not found -> userId={0}", userId));
+    }
+  }
+
+  private void addAddress(UserDomain userDomain) {
+    if (!Strings.isNullOrEmpty(userDomain.getCep())) {
+      Address address = this.cepService.getCep(userDomain.getCep());
+      if (Objects.nonNull(address)) {
+        AddressDomain addressDomain = address.toAddressDomain();
+        addressDomain.setUser(userDomain);
+        userDomain.setAddress(addressDomain);
+      }
+    }
+    else {
+      userDomain.setAddress(null);
     }
   }
 

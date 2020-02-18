@@ -23,6 +23,13 @@ spring:
         globally_quoted_identifiers: true
         temp:
           use_jdbc_metadata_defaults: false
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: create.sql
     open-in-view: false
   datasource:
     platform: postgres
@@ -36,3 +43,7 @@ spring:
       minimum-idle: ${HIKARI_MINIMUM_IDLE:2}
   main:
     allow-bean-definition-overriding: true
+
+rest:
+  api:
+    cep: ${HOST_CEP:https://api.postmon.com.br/v1}

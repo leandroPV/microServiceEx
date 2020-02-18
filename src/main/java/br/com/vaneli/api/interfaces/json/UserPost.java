@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Data
 @Builder
@@ -21,17 +22,21 @@ public class UserPost {
 
   @NotBlank
   @Size(max = 20)
+  @CPF
   private String cpf;
 
   @NotBlank
   @InternationalPhone
   private String phone;
 
+  private String cep;
+
   public UserDomain toUserDomain() {
     return UserDomain.builder()
       .name(this.name)
       .cpf(this.cpf)
       .phone(this.phone)
+      .cep(this.cep)
       .build();
   }
 
