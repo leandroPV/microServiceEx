@@ -42,6 +42,9 @@ public class UserDomain extends AuditDomain {
   @Column(name = "tx_cpf", nullable = false)
   private String cpf;
 
+  @Column(name = "tx_phone", nullable = false)
+  private String phone;
+
   @ToString.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
   private List<ContactDomain> contacts = newArrayList();
@@ -51,6 +54,7 @@ public class UserDomain extends AuditDomain {
       .id(this.id)
       .name(this.name)
       .cpf(this.cpf)
+      .phone(this.phone)
       .build();
   }
 

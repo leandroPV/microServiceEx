@@ -16,6 +16,7 @@ CREATE TABLE "user"
      "dt_updated" TIMESTAMP,
      "tx_cpf"     VARCHAR(255) NOT NULL,
      "tx_name"    VARCHAR(255) NOT NULL,
+     "tx_phone"   VARCHAR(255) NOT NULL,
      PRIMARY KEY ("tx_id_user")
   );
 
