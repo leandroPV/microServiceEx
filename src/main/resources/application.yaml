@@ -66,3 +66,7 @@ rest:
 
 queues:
   cepQueue: cep-queue
+
+aes:
+  secretKey: meuTesteSecreto123#@!
+  salt: meusalt123#@!

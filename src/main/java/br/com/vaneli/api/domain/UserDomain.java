@@ -2,6 +2,7 @@ package br.com.vaneli.api.domain;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+import br.com.vaneli.api.converters.EncryptAndDecryptAE256Converter;
 import br.com.vaneli.api.interfaces.enumerators.Sexo;
 import br.com.vaneli.api.interfaces.json.User;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -47,8 +49,8 @@ public class UserDomain extends AuditDomain {
   @Enumerated(EnumType.STRING)
   private Sexo sexo;
 
-  //TODO criptografar o cpf usando o @Convert
   @Column(name = "tx_cpf", nullable = false)
+  @Convert(converter = EncryptAndDecryptAE256Converter.class)
   private String cpf;
 
   @Column(name = "tx_phone", nullable = false)

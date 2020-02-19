@@ -17,5 +17,7 @@ public interface Messages {
 
   // 422
   String CONTACT_SYSTEM_ADMIN = "422.001";
+  String AES_ENCRYPT_ERROR = "422.002";
+  String AES_DECRYPT_ERROR = "422.003";
 
 }
