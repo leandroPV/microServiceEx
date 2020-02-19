@@ -11,6 +11,8 @@ import br.com.vaneli.api.interfaces.json.User;
 import br.com.vaneli.api.interfaces.json.UserPatch;
 import br.com.vaneli.api.interfaces.json.UserPost;
 import br.com.vaneli.api.interfaces.json.UserPut;
+import br.com.vaneli.api.queue.json.CepData;
+import br.com.vaneli.api.queue.senders.CepSender;
 import br.com.vaneli.api.repository.UserRepository;
 import br.com.vaneli.api.services.CepService;
 import br.com.vaneli.api.services.UserService;
@@ -31,22 +33,27 @@ public class UserServiceImpl implements UserService {
   private final MessageError messageError;
   private final UserRepository userRepository;
   private final CepService cepService;
+  private final CepSender cepSender;
 
   public UserServiceImpl(
     MessageError messageError,
-    UserRepository userRepository, CepService cepService) {
+    UserRepository userRepository, CepService cepService,
+    CepSender cepSender) {
     this.messageError = messageError;
     this.userRepository = userRepository;
     this.cepService = cepService;
+    this.cepSender = cepSender;
   }
 
   @Override
-  @Transactional
   public UserDomain postUser(UserPost userPost) {
     UserDomain userDomain = userPost.toUserDomain();
-    addAddress(userDomain);
 
-    return this.userRepository.save(userDomain);
+    userDomain = this.userRepository.save(userDomain);
+
+    addToQueueCep(userDomain, userPost.getCep());
+
+    return userDomain;
   }
 
   @Override
@@ -65,23 +72,24 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  @Transactional
   public void putUser(UUID userId, UserPut userPut) {
     UserDomain userDomain = this.getUserDomainById(userId);
 
     userPut.toUserDomain(userDomain);
-    addAddress(userDomain);
-    this.userRepository.save(userDomain);
+    userDomain = this.userRepository.save(userDomain);
+
+    addToQueueCep(userDomain, userDomain.getCep());
+
   }
 
   @Override
-  @Transactional
   public void patchUser(UUID userId, UserPatch userPatch) {
     UserDomain userDomain = this.getUserDomainById(userId);
 
     userPatch.toUserDomain(userDomain);
-    addAddress(userDomain);
-    this.userRepository.save(userDomain);
+    userDomain = this.userRepository.save(userDomain);
+
+    addToQueueCep(userDomain, userDomain.getCep());
   }
 
   @Override
@@ -111,7 +119,9 @@ public class UserServiceImpl implements UserService {
     }
   }
 
-  private void addAddress(UserDomain userDomain) {
+  @Override
+  public void addAddressToUserByCep(CepData cepData) {
+    UserDomain userDomain = this.getUserDomainById(cepData.getUserId());
     if (!Strings.isNullOrEmpty(userDomain.getCep())) {
       Address address = this.cepService.getCep(userDomain.getCep());
       if (Objects.nonNull(address)) {
@@ -119,10 +129,17 @@ public class UserServiceImpl implements UserService {
         addressDomain.setUser(userDomain);
         userDomain.setAddress(addressDomain);
       }
-    }
-    else {
+    } else {
       userDomain.setAddress(null);
     }
+    this.userRepository.save(userDomain);
+  }
+
+  private void addToQueueCep(UserDomain userDomain, String cep) {
+    this.cepSender.addToQueue(CepData.builder()
+      .userId(userDomain.getId())
+      .cep(cep)
+      .build());
   }
 
 }

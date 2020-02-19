@@ -13,6 +13,22 @@ management:
       exposure:
         include: "info,health"
 spring:
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USER:guest}
+    password: ${RABBIT_PASS:guest}
+    template:
+      exchange: api-exemple
+    listener:
+      simple:
+        concurrency: ${QUEUE_CONCURRENCY:5}
+        max-concurrency: ${QUEUE_MAX_CONCURRENCY:15}
+        retry:
+          enabled: true
+          max-attempts: ${QUEUE_RETRY_MAX_ATTEMPS:5}
+          initial-interval: ${QUEUE_RETRY_DELAY:10000}
+          multiplier: 3
   jpa:
     database: postgresql
     show-sql: ${HIBERNATE_SHOW_SQL:true}
@@ -47,3 +63,6 @@ spring:
 rest:
   api:
     cep: ${HOST_CEP:https://api.postmon.com.br/v1}
+
+queues:
+  cepQueue: cep-queue

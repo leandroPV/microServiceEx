@@ -6,6 +6,7 @@ import br.com.vaneli.api.interfaces.json.User;
 import br.com.vaneli.api.interfaces.json.UserPatch;
 import br.com.vaneli.api.interfaces.json.UserPost;
 import br.com.vaneli.api.interfaces.json.UserPut;
+import br.com.vaneli.api.queue.json.CepData;
 import java.util.UUID;
 import org.springframework.data.domain.Page;
 
@@ -26,5 +27,7 @@ public interface UserService {
   UserDomain getUserDomainById(UUID userId);
 
   void existsUserDomainById(UUID userId);
+
+  void addAddressToUserByCep(CepData cepData);
 
 }

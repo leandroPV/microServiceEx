@@ -19,6 +19,8 @@ import br.com.vaneli.api.interfaces.json.User;
 import br.com.vaneli.api.interfaces.json.UserPatch;
 import br.com.vaneli.api.interfaces.json.UserPost;
 import br.com.vaneli.api.interfaces.json.UserPut;
+import br.com.vaneli.api.queue.json.CepData;
+import br.com.vaneli.api.queue.senders.CepSender;
 import br.com.vaneli.api.repository.UserRepository;
 import br.com.vaneli.api.services.CepService;
 import br.com.vaneli.api.services.UserService;
@@ -75,6 +77,10 @@ public class UserServiceImplTest {
   private Address address;
   @Mock
   private AddressDomain addressDomain;
+  @Mock
+  private CepSender cepSender;
+  @Mock
+  private CepData cepData;
 
   @BeforeAll
   public static void beforeAll() {
@@ -86,7 +92,7 @@ public class UserServiceImplTest {
 
   @BeforeEach
   public void beforeEach() {
-    userService = spy(new UserServiceImpl(messageError, userRepository, cepService));
+    userService = spy(new UserServiceImpl(messageError, userRepository, cepService, cepSender));
   }
 
   @DisplayName("Should add user successfully")
@@ -103,9 +109,9 @@ public class UserServiceImplTest {
   public void postUserWithCepSuccessfully() {
     when(userPost.toUserDomain()).thenReturn(userDomain);
     when(userRepository.save(userDomain)).thenReturn(userDomain);
-    when(userDomain.getCep()).thenReturn(CEP);
-    when(cepService.getCep(CEP)).thenReturn(address);
-    when(address.toAddressDomain()).thenReturn(addressDomain);
+//    when(userDomain.getCep()).thenReturn(CEP);
+//    when(cepService.getCep(CEP)).thenReturn(address);
+//    when(address.toAddressDomain()).thenReturn(addressDomain);
 
     assertEquals(userDomain, userService.postUser(userPost));
   }
