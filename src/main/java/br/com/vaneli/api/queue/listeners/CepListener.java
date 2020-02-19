@@ -23,7 +23,7 @@ public class CepListener {
 
     this.userService.addAddressToUserByCep(cepData);
 
-    log.info("Provisioning get cep by API finished. userId={} cep={}",
+    log.info("processing get cep by API finished. userId={} cep={}",
       cepData.getUserId(), cepData.getCep());
   }
 
