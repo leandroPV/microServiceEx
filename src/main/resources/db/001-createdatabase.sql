@@ -29,6 +29,7 @@ CREATE TABLE "user"
      "tx_name"    VARCHAR(255) NOT NULL,
      "tx_phone"   VARCHAR(255) NOT NULL,
      "tx_cep"     VARCHAR(255),
+     "tx_sexo"    VARCHAR(20) NOT NULL,
      PRIMARY KEY ("tx_id_user")
   );
 

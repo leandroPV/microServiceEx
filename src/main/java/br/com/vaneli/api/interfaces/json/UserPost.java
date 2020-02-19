@@ -1,8 +1,10 @@
 package br.com.vaneli.api.interfaces.json;
 
 import br.com.vaneli.api.domain.UserDomain;
+import br.com.vaneli.api.interfaces.enumerated.Sexo;
 import br.com.vaneli.api.validators.InternationalPhone;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +21,9 @@ public class UserPost {
   @NotBlank
   @Size(max = 255)
   private String name;
+
+  @NotNull
+  private Sexo sexo;
 
   @NotBlank
   @Size(max = 20)
@@ -37,6 +42,7 @@ public class UserPost {
       .cpf(this.cpf)
       .phone(this.phone)
       .cep(this.cep)
+      .sexo(this.sexo)
       .build();
   }
 

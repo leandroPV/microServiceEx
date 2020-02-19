@@ -1,5 +1,6 @@
 package br.com.vaneli.api.interfaces.json;
 
+import br.com.vaneli.api.interfaces.enumerated.Sexo;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +16,8 @@ public class User {
   private UUID id;
 
   private String name;
+
+  private Sexo sexo;
 
   private String cpf;
 

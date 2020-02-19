@@ -1,8 +1,10 @@
 package br.com.vaneli.api.interfaces.json;
 
 import br.com.vaneli.api.domain.UserDomain;
+import br.com.vaneli.api.interfaces.enumerated.Sexo;
 import br.com.vaneli.api.validators.InternationalPhone;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +22,9 @@ public class UserPut {
   @Size(max = 255)
   private String name;
 
+  @NotNull
+  private Sexo sexo;
+
   @NotBlank
   @Size(max = 20)
   @CPF
@@ -36,6 +41,7 @@ public class UserPut {
     userDomain.setCpf(this.cpf);
     userDomain.setPhone(this.phone);
     userDomain.setCep(this.cep);
+    userDomain.setSexo(this.sexo);
   }
 
 }

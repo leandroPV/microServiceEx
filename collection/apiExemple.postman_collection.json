@@ -94,7 +94,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"leandro vaneli 4\",\n\t\"cpf\": \"14291996799\",\n\t\"phone\": \"+5527999365103\",\n\t\"cep\": \"13087-460\"\n}",
+							"raw": "{\n\t\"name\": \"leandro vaneli 4\",\n\t\"sexo\": \"MASCULINO\",\n\t\"cpf\": \"14291996799\",\n\t\"phone\": \"+5527999365103\",\n\t\"cep\": \"13087-460\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -227,7 +227,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"leandro vaneli 3\",\n\t\"cpf\": \"14291996799\",\n\t\"phone\": \"+5527999365103\"\n}",
+							"raw": "{\n\t\"name\": \"leandro vaneli 3\",\n\t\"sexo\": \"FEMININO\",\n\t\"cpf\": \"14291996799\",\n\t\"phone\": \"+5527999365103\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -276,7 +276,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"cpf\": \"88868252007\",\n\t\"cep\": \"13097-252\"\n}",
+							"raw": "{\n\t\"cpf\": \"88868252007\",\n\t\"sexo\": \"MASCULINO\",\n\t\"cep\": \"13097-252\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

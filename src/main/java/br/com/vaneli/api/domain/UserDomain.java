@@ -2,6 +2,7 @@ package br.com.vaneli.api.domain;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+import br.com.vaneli.api.interfaces.enumerated.Sexo;
 import br.com.vaneli.api.interfaces.json.User;
 import java.util.List;
 import java.util.Objects;
@@ -9,6 +10,8 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -40,6 +43,10 @@ public class UserDomain extends AuditDomain {
   @Column(name = "tx_name", nullable = false)
   private String name;
 
+  @Column(name = "tx_sexo", nullable = false)
+  @Enumerated(EnumType.STRING)
+  private Sexo sexo;
+
   //TODO criptografar o cpf usando o @Convert
   @Column(name = "tx_cpf", nullable = false)
   private String cpf;
@@ -65,6 +72,7 @@ public class UserDomain extends AuditDomain {
       .cpf(this.cpf)
       .phone(this.phone)
       .cep(this.cep)
+      .sexo(this.sexo)
       .build();
 
     if (Objects.nonNull(this.address)) {
