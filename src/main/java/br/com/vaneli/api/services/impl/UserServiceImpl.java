@@ -120,6 +120,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  @Transactional
   public void addAddressToUserByCep(CepData cepData) {
     UserDomain userDomain = this.getUserDomainById(cepData.getUserId());
     if (!Strings.isNullOrEmpty(userDomain.getCep())) {

@@ -45,7 +45,7 @@ public class UserServiceImplTest {
   private static Integer LIMIT;
   private static Integer OFFSET;
   private static UUID USER_ID;
-  private  static String CEP;
+  private static String CEP;
 
   private UserService userService;
 
@@ -104,16 +104,30 @@ public class UserServiceImplTest {
     assertEquals(userDomain, userService.postUser(userPost));
   }
 
-  @DisplayName("Should add user with cep successfully")
+  @DisplayName("Should add address with cep successfully")
   @Test
-  public void postUserWithCepSuccessfully() {
-    when(userPost.toUserDomain()).thenReturn(userDomain);
+  public void addAddressWithCepSuccessfully() {
     when(userRepository.save(userDomain)).thenReturn(userDomain);
-//    when(userDomain.getCep()).thenReturn(CEP);
-//    when(cepService.getCep(CEP)).thenReturn(address);
-//    when(address.toAddressDomain()).thenReturn(addressDomain);
+    when(userRepository.findById(USER_ID)).thenReturn(Optional.of(userDomain));
+    when(cepData.getUserId()).thenReturn(USER_ID);
+    when(userDomain.getCep()).thenReturn(CEP);
+    when(cepService.getCep(CEP)).thenReturn(address);
+    when(address.toAddressDomain()).thenReturn(addressDomain);
 
-    assertEquals(userDomain, userService.postUser(userPost));
+    userService.addAddressToUserByCep(cepData);
+
+  }
+
+  @DisplayName("Should not add address with cep is null successfully")
+  @Test
+  public void notAddAddressWithCepIsNullSuccessfully() {
+    when(userRepository.save(userDomain)).thenReturn(userDomain);
+    when(userRepository.findById(USER_ID)).thenReturn(Optional.of(userDomain));
+    when(cepData.getUserId()).thenReturn(USER_ID);
+    when(userDomain.getCep()).thenReturn(null);
+
+    userService.addAddressToUserByCep(cepData);
+
   }
 
   @DisplayName("Should get users successfully")
@@ -215,6 +229,25 @@ public class UserServiceImplTest {
 
     assertThrows(NotFoundException.class,
       () -> userService.deleteUser(USER_ID));
+  }
+
+  @DisplayName("Should verify exists user successfully")
+  @Test
+  public void existsUserSuccessfully() {
+    when(userRepository.existsById(USER_ID)).thenReturn(true);
+
+    userService.existsUserDomainById(USER_ID);
+    verify(userRepository, times(1)).existsById(USER_ID);
+  }
+
+  @DisplayName("Should verify not exists user")
+  @Test
+  public void notExistsUser() {
+    when(userRepository.existsById(USER_ID)).thenReturn(false);
+    when(messageError.create(Messages.USER_NOT_FOUND)).thenReturn(apiError);
+
+    assertThrows(NotFoundException.class,
+      () -> userService.existsUserDomainById(USER_ID));
   }
 
 }

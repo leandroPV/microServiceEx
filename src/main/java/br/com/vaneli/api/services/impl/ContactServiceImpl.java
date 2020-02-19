@@ -100,6 +100,7 @@ public class ContactServiceImpl implements ContactService {
   @Override
   @Transactional
   public void deleteContact(UUID userId, UUID contactId) {
+    this.userService.existsUserDomainById(userId);
     ContactDomain contactDomain = this.getContactDomain(userId, contactId);
     this.contactRepository.delete(contactDomain);
   }
