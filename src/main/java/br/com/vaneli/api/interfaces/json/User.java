@@ -1,6 +1,6 @@
 package br.com.vaneli.api.interfaces.json;
 
-import br.com.vaneli.api.interfaces.enumerated.Sexo;
+import br.com.vaneli.api.interfaces.enumerators.Sexo;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package br.com.vaneli.api.interfaces.json;
 
 import br.com.vaneli.api.domain.UserDomain;
-import br.com.vaneli.api.interfaces.enumerated.Sexo;
+import br.com.vaneli.api.interfaces.enumerators.Sexo;
 import br.com.vaneli.api.validators.InternationalPhone;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

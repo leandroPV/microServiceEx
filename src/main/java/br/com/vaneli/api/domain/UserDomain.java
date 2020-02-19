@@ -2,7 +2,7 @@ package br.com.vaneli.api.domain;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-import br.com.vaneli.api.interfaces.enumerated.Sexo;
+import br.com.vaneli.api.interfaces.enumerators.Sexo;
 import br.com.vaneli.api.interfaces.json.User;
 import java.util.List;
 import java.util.Objects;
